@@ -242,6 +242,59 @@
                 exit();
             }
         }
+
+        public function addToCart() {
+            session_start(); // Đảm bảo session đã được khởi động
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $idHocPhan = isset($_GET['MaHP']) ? $_GET['MaHP'] : null;
+
+                $maSV = isset($_COOKIE['userName']) ? $_COOKIE['userName'] : null;
+        
+                if (!isset($_SESSION['cart'])) {
+                    $_SESSION['cart'] = []; 
+                }
+        
+                if ($maSV && $idHocPhan) {
+                    $_SESSION['cart'][] = [
+                        'ma_sv' => $maSV,
+                        'id_hoc_phan' => $idHocPhan
+                    ];
+        
+                    // Lưu thông báo vào session thay vì echo trực tiếp
+                    $_SESSION['message'] = "Sản phẩm đã được thêm vào giỏ hàng.";
+                } else {
+                    $_SESSION['message'] = "Mã sinh viên hoặc ID học phần không tồn tại.";
+                }
+        
+                // Chuyển hướng về trang giỏ hàng
+                header("Location: ?controller=Sinhvien&action=viewCart");
+                exit();
+            }
+        }
+        
+        
+        public function viewCart() {
+            session_start(); 
+        
+            // Hiển thị thông báo nếu có
+            if (isset($_SESSION['message'])) {
+                echo "<p>" . htmlspecialchars($_SESSION['message']) . "</p>";
+                unset($_SESSION['message']); // Xóa sau khi hiển thị
+            }
+        
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+        
+            if (empty($cart)) {
+                echo "Giỏ hàng của bạn hiện đang trống.";
+            } else {
+                foreach ($cart as $item) {
+                    echo "Mã sinh viên: " . htmlspecialchars($item['ma_sv']) . "<br>";
+                    echo "ID học phần: " . htmlspecialchars($item['id_hoc_phan']) . "<br>";
+                }
+            }
+        }
+        
         
     }
 ?>

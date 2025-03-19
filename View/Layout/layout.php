@@ -65,9 +65,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#">Xin chào, <?php echo $_COOKIE['userName']; ?></a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="/PHP_BaoCao/index.php?controller=user&action=logout">Đăng xuất</a>
                             </li>
+                            <a href="?controller=Sinhvien&action=viewCart" class="btn btn-sm btn-outline-secondary">Xem Giỏ Hàng</a>
 
                         <?php else: ?>
                             <!-- Hiển thị khi người dùng chưa đăng nhập -->

@@ -60,9 +60,11 @@
                                    
                                   
                                     <td class="px-4 py-3 text-center">
-                                    <a href="?controller=Sinhvien&action=edit&MaSv=<?php echo urlencode($hp->SoTinChi); ?>" class="btn btn-sm btn-outline-primary me-2">
+                                    <a href="?controller=Sinhvien&action=addToCart&MaHP=<?php echo urlencode($hp->MaHP); ?>"
+                                        class="btn btn-sm btn-outline-primary me-2">
                                         <i class="bi bi-pencil me-1"></i> Đăng kí
                                     </a>
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
